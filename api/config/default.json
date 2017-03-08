@@ -1,0 +1,26 @@
+{
+    "server": {
+        "port": 8087
+    },
+    //default 1943 for docker-compose
+    "mongo": {
+        "uri": "mongodb://localhost/freds",
+        "options": {
+            "server": {
+                "auto_reconnect": true,
+                "socketOptions": {
+                    "keepAlive": 1,
+                    "connectTimeoutMS": 30000
+                }
+            }
+        }
+    },
+    "authentication": {
+        "hostname": "http://localhost:8055/token/valid"
+    },
+	"allowedRoles":["FREDS-Marketing"],
+
+     "logger": {
+         "level": "debug"
+     }
+}

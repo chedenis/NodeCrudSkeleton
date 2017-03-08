@@ -1,0 +1,46 @@
+---
+# Deploy and restart latest marketing-tracker-api on QA hosts
+
+- hosts: freds-qa
+  tasks:
+    - name: Ensure app directory exists
+      file: path=/data/apps/marketing-tracker/ state=directory
+    - name: Ensure api01 log directory exists
+      file: path=/data/docker-persist/marketing-tracker/api01/logs/ state=directory
+    - name: Ensure api02 log directory exists
+      file: path=/data/docker-persist/marketing-tracker/api02/logs/ state=directory
+    - name: Ensure api03 log directory exists
+      file: path=/data/docker-persist/marketing-tracker/api03/logs/ state=directory
+    - name: Copy docker-compose-qa file
+      copy: src=../docker-compose-qa.yml dest=/data/apps/marketing-tracker/docker-compose-qa.yml
+    - name: Synchronize API directory
+      synchronize: src=../api dest=/data/apps/marketing-tracker/
+    - name: Synchronize client directory
+      synchronize: src=../client dest=/data/apps/marketing-tracker/
+    - name: Install client build dependencies
+      shell: npm install
+      args:
+        chdir: /data/apps/marketing-tracker/client/
+    - name: Install client runtime dependencies
+      shell: bower install --config.interactive=false
+      args:
+        chdir: /data/apps/marketing-tracker/client/
+    - name: Configure client environment
+      shell: grunt build:qa
+      args:
+        chdir: /data/apps/marketing-tracker/client/
+    - name: Docker Trusted Registry login
+      shell: yes | docker login -u jenkinsci -p Jenk#1234 repo01.ad.cslico.com
+    - name: Pull marketing-tracker-api:latest image (workaround for https://github.com/docker/compose/issues/1622)
+      command: docker pull repo01.ad.cslico.com/jenkinsci/marketing-tracker-api:latest
+    - name: Pull marketing-tracker-api-haproxy:latest image (workaround for https://github.com/docker/compose/issues/1622)
+      command: docker pull repo01.ad.cslico.com/jenkinsci/marketing-tracker-api-haproxy:latest
+    - name: Down docker-compose (workaround to docker-compose bug which causes app changes to occasionally not take)
+      shell: docker-compose -f docker-compose-qa.yml down
+      ignore_errors: true
+      args:
+        chdir: /data/apps/marketing-tracker/
+    - name: Start docker-compose
+      shell: NODE_ENV=qa docker-compose -f docker-compose-qa.yml up -d
+      args:
+        chdir: /data/apps/marketing-tracker/

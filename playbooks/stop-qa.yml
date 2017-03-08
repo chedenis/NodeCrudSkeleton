@@ -1,0 +1,7 @@
+---
+# Stop latest offset-tracker-api on QA hosts
+
+- hosts: freds-qa
+  tasks:
+    - name: docker-compose stop
+      shell: NODE_ENV=qa docker-compose -f docker-compose-qa.yml stop chdir=/data/apps/offset-tracker

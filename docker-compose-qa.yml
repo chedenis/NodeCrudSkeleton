@@ -1,0 +1,54 @@
+version: "2"
+services:
+    api01:
+      image: "repo01.ad.cslico.com/jenkinsci/offset-tracker-api:latest"
+      container_name: "offset_api01"
+      volumes:
+        - ./api:/usr/src/app:rw
+        - /etc/localtime:/etc/localtime:ro
+        - /data/docker-persist/offset-tracker/api01/logs:/usr/src/app/output_logs:rw
+      environment:
+        NODE_ENV: ${NODE_ENV}
+      expose:
+        - "3000"
+      restart: always
+
+    api02:
+      image: "repo01.ad.cslico.com/jenkinsci/offset-tracker-api:latest"
+      container_name: "offset_api02"
+      volumes:
+        - ./api:/usr/src/app:rw
+        - /etc/localtime:/etc/localtime:ro
+        - /data/docker-persist/offset-tracker/api02/logs:/usr/src/app/output_logs:rw
+      environment:
+        NODE_ENV: ${NODE_ENV}
+      expose:
+        - "3000"
+      restart: always
+
+    api03:
+      image: "repo01.ad.cslico.com/jenkinsci/offset-tracker-api:latest"
+      container_name: "offset_api03"
+      volumes:
+        - ./api:/usr/src/app:rw
+        - /etc/localtime:/etc/localtime:ro
+        - /data/docker-persist/offset-tracker/api03/logs:/usr/src/app/output_logs:rw
+      environment:
+        NODE_ENV: ${NODE_ENV}
+      expose:
+        - "3000"
+      restart: always
+
+    haproxy:
+      image: "repo01.ad.cslico.com/jenkinsci/offset-tracker-api-haproxy:latest"
+      container_name: "offset_api_haproxy"
+      volumes:
+        - /etc/localtime:/etc/localtime:ro
+      links:
+        - api01
+        - api02
+        - api03
+      ports:
+        - "8087:8087"
+        - "1943:1943"
+      restart: always
