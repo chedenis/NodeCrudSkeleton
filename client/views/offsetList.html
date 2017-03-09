@@ -1,0 +1,125 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-4">
+            <h3>Offsets</h3>
+        </div>
+
+        <div class="col-xs-4" style="margin-top: 20px; margin-bottom: 10px;">
+        </div>
+
+        <div class="col-xs-4" style="margin-top: 20px; margin-bottom: 10px;">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="{{alert.dismissOnTimeout}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-xs-12">
+            <div class="input-group" id="adv-search">
+                <div class="input-group-btn">
+                    <div class="btn-group">
+                        <div class="adv-search-dropdown dropdown-lg" dropdown-append-to="adv-search" auto-close="outsideClick" is-open="openAdvSearch"
+                            uib-dropdown>
+                            <button type="button" id="split-button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false"
+                                uib-dropdown-toggle>
+                                Filters <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                </button>
+                            <div class="dropdown-menu dropdown-menu-left" role="menu" uib-dropdown-menu style="min-width:600px; font-size:18px;">
+                                <legend><i>Filters</i></legend>
+
+                                <div class="col-xs-12">
+                                    <div class="divider"></div>
+                                </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <input type="text" class="form-control" ng-model="search.name.$" placeholder="Type in name to search offsets" focus="true">
+            </div>
+        </div>
+    </div>
+
+    <!--<div style="margin-top:20px;">
+        <span ng-show="search.name">
+            <span class="tag label label-primary">
+                <b><i>Name:</i></b> {{search.name.$}}
+                <strong>
+                    <a ng-click="search.name = {}"><span class="glyphicon glyphicon-remove-sign glyphicon-white"></span></a>
+        </strong>
+        </span>
+        </span>
+
+    </div>-->
+
+    <div class="row">
+        <div class="col-xs-12">
+
+            <table st-table="offsets" ng-show="offsets && offsets.length > 0" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Group Id</th>
+                        <th>Participant Id</th>
+                        <th>Billing Account Number</th>
+                        <th>Resident Name</th>
+                        <th>State</th>
+                        <th>Request Date</th>
+                        <th>Approval Date</th>
+                        <th>Age</th>
+                        <th>Premium Received</th>
+                        <th>Last Update</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                    <tr dir-paginate="offset in offsets | itemsPerPage:15">
+                        <td>
+                            {{offset.member.groupId}}
+                        </td>
+                        <td>
+                            {{offset.member.participantId}}
+                        </td>
+                        <td>
+                            {{offset.member.accountNumber}}
+                        </td>
+                        <td>
+                            wheres this name
+                        </td>
+                        <td>
+                            pull in State
+                        </td>
+                        <td>
+                            {{offset.requestDate}}
+                        </td>
+                        <td>
+                            {{offset.approvalDate}}
+                        </td>
+                        <td>
+                            calculate age ?
+                        </td>
+                        <td>
+                            pull in Premium
+                        </td>
+                        <td>
+                            offset.updatedTimestamp
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <dir-pagination-controls max-size="5" direction-links="true" boundary-links="false">
+                    </dir-pagination-controls>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+
+</div>

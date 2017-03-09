@@ -17,22 +17,22 @@ var offsetSchema = new mongoose.Schema({
          required: true,
          type: String
      },
-    // requestDate: {
-    //     required: true,
-    //     type: Date
-    // },
-    // approvalDate: {
-    //     type: Date
-    // },
-    // approvalStatus: {
-    //     type: String,
-    //     enum: ["Pending", "Approved", "Canceled", "Invalid", "Premium Received"]
-    // },
-    // member: {
-    //     groupId: { type: String, required: true },
-    //     participantId: { type: String, required: true },
-    //     accountNumber: { type: Number, required: true }
-    // },
+    requestDate: {
+        required: true,
+        type: Date
+    },
+    approvalDate: {
+        type: Date
+    },
+    approvalStatus: {
+        type: String,
+        enum: ["Pending", "Approved", "Canceled", "Invalid", "Premium Received"]
+    },
+    member: {
+        groupId: { type: String, required: true },
+        participantId: { type: String, required: true },
+        accountNumber: { type: Number, required: true }
+    },
     createdTimestamp: {
         required: true,
         type: Date

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" ng-app="offset.tracker" class="no-js">
+<!--<![endif]-->
+
+<head>
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="custom.css">
+    <link rel="stylesheet" href="bower_components/ladda/dist/ladda-themeless.min.css">
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script src="bower_components/angular-ui/build/angular-ui.min.js"></script>
+    <script src="bower_components/angular-ui/modules/filters/highlight/highlight.js"></script>
+    <script src="bower_components/ui-select/dist/select.js"></script>
+    <link rel="stylesheet" href="bower_components/ui-select/dist/select.css" />
+    <!-- Select2 theme -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
+    <script src="bower_components/angular-ui-mask/dist/mask.js"></script>
+    <script src="bower_components/angular-ui/modules/directives/animate/animate.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-spinner/angular-spinner.min.js"></script>
+    <script src="bower_components/angular-uuid/uuid.min.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.min.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="bower_components/angular-confirm-modal/angular-confirm.min.js"></script>
+    <script src="bower_components/ng-file-upload/ng-file-upload-all.min.js"></script>
+    <script type="text/javascript" src="bower_components/async/dist/async.min.js"></script>
+    <script src="bower_components/angular-utils-pagination/dirPagination.js"></script>
+    <script src="bower_components/ladda/js/spin.js"></script>
+    <script src="bower_components/ladda/js/ladda.js"></script>
+    <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
+    <script src="app.js"></script>
+    <script src="scripts/config.js"></script>
+    <script src="controllers/menubar.js"></script>
+    <script src="controllers/offsetList.js"></script>
+
+    <script src="services/states.js"></script>
+
+    <script src="services/offset.js"></script>
+    <script src="auth/auth.service.js"></script>
+    <script src="auth/auth.controller.js"></script>
+    <script src="bower_components/ladda/dist/spin.min.js"></script>
+    <script src="bower_components/ladda/dist/ladda.min.js"></script>
+    <script src="bower_components/angular-ladda/dist/angular-ladda.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top" ng-controller="menubar" ng-show="showIfNotOnPath('/login')">
+        <div class="container">
+            <div class="navbar-header">
+                <div class="navbar-brand">{{title}}</div>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li ng-class="{ active: isActive('/list')}"><a href="#/list">View Offsets</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li uib-dropdown class='navbar-dropdown'>
+                        <a uib-dropdown-toggle>
+                            <span class="glyphicon glyphicon-user"></span> {{activeUserFirstName}}
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                        </a>
+                        <ul uib-dropdown-menu>
+                            <li>
+                                <div class="navbar-user">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <p class="text-center">
+                                                <span class="glyphicon glyphicon-user icon-size"></span>
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <p class="text-left"><strong>{{activeUserFullName}}</strong></p>
+                                            <p class="text-left small">{{activeUserEmail}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <div class="navbar-user navbar-user-session">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <p>
+                                                <a ng-click="logout()" class="btn btn-danger btn-block">Logout</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div ng-view class="container-fluid" style="margin-top:60px"></div>
+</body>
+
+</html>

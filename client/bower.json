@@ -1,0 +1,46 @@
+{
+  "name": "offset-views",
+  "version": "0.0.0",
+  "authors": [
+    "Ches R. Denison <cdenison@cslico.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "UNLICENSED",
+  "private": true,
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.7",
+    //A factory which creates a resource object that lets you interact with RESTful server-side data sources.
+    //requires ngResource in app.js
+    "angular-resource": "1.5.7", 
+    //bootstrap pre-built css
+    "bootstrap": "3.3.6",
+    // native AngularJS directives based on Bootstrap's markup and CSS
+    "angular-bootstrap": "1.3.3", 
+    //Font Awesome is a full suite of 675 pictographic icons for easy scalable vector graphics on websites
+    "font-awesome": "4.6.3",
+    //A lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.
+    "moment": "2.17.1",
+    //Provides read/write access to browser's cookies
+    "angular-cookies": "1.4.14",
+    "angularjs": "1.5.7",
+    //dropdown css
+    "ui-select": "https://github.com/angular-ui/ui-select.git#v0.19.6",
+    //easy css to add laddas to loading functions
+    "angular-ladda": "0.3.4",
+    //easy front end pagination
+    "angular-utils-pagination": "*"
+  },
+  "resolutions": {
+    "angular": "1.5.7"
+  }
+}
